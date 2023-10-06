@@ -30,6 +30,9 @@ namespace machinevision
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.openfile = new FontAwesome.Sharp.IconButton();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel_opengl = new System.Windows.Forms.TableLayoutPanel();
@@ -49,6 +52,8 @@ namespace machinevision
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.panel1.SuspendLayout();
+            this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -66,11 +71,44 @@ namespace machinevision
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.panel1.Controls.Add(this.panel3);
+            this.panel1.Controls.Add(this.panel2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(53, 514);
             this.panel1.TabIndex = 0;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.openfile);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(0, 43);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(53, 48);
+            this.panel3.TabIndex = 1;
+            // 
+            // openfile
+            // 
+            this.openfile.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.openfile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.openfile.IconChar = FontAwesome.Sharp.IconChar.FolderOpen;
+            this.openfile.IconColor = System.Drawing.Color.LightSteelBlue;
+            this.openfile.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.openfile.Location = new System.Drawing.Point(0, 0);
+            this.openfile.Name = "openfile";
+            this.openfile.Size = new System.Drawing.Size(53, 48);
+            this.openfile.TabIndex = 0;
+            this.openfile.UseVisualStyleBackColor = true;
+            this.openfile.Click += new System.EventHandler(this.openfile_Click);
+            // 
+            // panel2
+            // 
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(53, 43);
+            this.panel2.TabIndex = 0;
             // 
             // splitContainer1
             // 
@@ -211,7 +249,7 @@ namespace machinevision
             this.tableLayoutPanel7.ColumnCount = 3;
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.19786F));
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.80214F));
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 95F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 97F));
             this.tableLayoutPanel7.Controls.Add(this.iconButton3, 2, 1);
             this.tableLayoutPanel7.Controls.Add(this.iconButton2, 1, 1);
             this.tableLayoutPanel7.Controls.Add(this.label7, 2, 0);
@@ -236,9 +274,9 @@ namespace machinevision
             this.iconButton3.IconChar = FontAwesome.Sharp.IconChar.CheckDouble;
             this.iconButton3.IconColor = System.Drawing.Color.LavenderBlush;
             this.iconButton3.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton3.Location = new System.Drawing.Point(206, 33);
+            this.iconButton3.Location = new System.Drawing.Point(204, 23);
             this.iconButton3.Name = "iconButton3";
-            this.iconButton3.Size = new System.Drawing.Size(90, 62);
+            this.iconButton3.Size = new System.Drawing.Size(92, 48);
             this.iconButton3.TabIndex = 7;
             this.iconButton3.UseVisualStyleBackColor = false;
             // 
@@ -251,9 +289,9 @@ namespace machinevision
             this.iconButton2.IconChar = FontAwesome.Sharp.IconChar.Stop;
             this.iconButton2.IconColor = System.Drawing.Color.LavenderBlush;
             this.iconButton2.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton2.Location = new System.Drawing.Point(103, 33);
+            this.iconButton2.Location = new System.Drawing.Point(102, 23);
             this.iconButton2.Name = "iconButton2";
-            this.iconButton2.Size = new System.Drawing.Size(97, 62);
+            this.iconButton2.Size = new System.Drawing.Size(96, 48);
             this.iconButton2.TabIndex = 6;
             this.iconButton2.UseVisualStyleBackColor = false;
             // 
@@ -264,9 +302,9 @@ namespace machinevision
             this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label7.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(206, 0);
+            this.label7.Location = new System.Drawing.Point(204, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(90, 30);
+            this.label7.Size = new System.Drawing.Size(92, 20);
             this.label7.TabIndex = 5;
             this.label7.Text = "CREATE LOG";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -278,9 +316,9 @@ namespace machinevision
             this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label6.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(103, 0);
+            this.label6.Location = new System.Drawing.Point(102, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(97, 30);
+            this.label6.Size = new System.Drawing.Size(96, 20);
             this.label6.TabIndex = 4;
             this.label6.Text = "STOP";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -294,7 +332,7 @@ namespace machinevision
             this.label5.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(3, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(94, 30);
+            this.label5.Size = new System.Drawing.Size(93, 20);
             this.label5.TabIndex = 0;
             this.label5.Text = "START";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -308,9 +346,9 @@ namespace machinevision
             this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.Play;
             this.iconButton1.IconColor = System.Drawing.Color.LavenderBlush;
             this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton1.Location = new System.Drawing.Point(3, 33);
+            this.iconButton1.Location = new System.Drawing.Point(3, 23);
             this.iconButton1.Name = "iconButton1";
-            this.iconButton1.Size = new System.Drawing.Size(94, 62);
+            this.iconButton1.Size = new System.Drawing.Size(93, 48);
             this.iconButton1.TabIndex = 3;
             this.iconButton1.UseVisualStyleBackColor = false;
             // 
@@ -368,6 +406,8 @@ namespace machinevision
             this.Controls.Add(this.panel1);
             this.Name = "Main_form";
             this.Text = "Main";
+            this.panel1.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -410,6 +450,9 @@ namespace machinevision
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private FontAwesome.Sharp.IconButton iconButton1;
+        private System.Windows.Forms.Panel panel3;
+        private FontAwesome.Sharp.IconButton openfile;
+        private System.Windows.Forms.Panel panel2;
     }
 }
 
