@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -38,6 +39,23 @@ namespace machinevision
         {
             InitializeComponent();
             InitializeOpenGLControl();
+
+            grid_data.Columns.Add("ID", "ID");
+            grid_data.Columns.Add("Name", "Name");
+
+            NetworkChange.NetworkAvailabilityChanged += (s, ne) =>
+            {
+                if (ne.IsAvailable)
+                {
+                    lblCheckNetwork.BackColor = Color.LimeGreen;
+                    lblCheckNetwork.Text = "정상";
+                }
+                else
+                {
+                    lblCheckNetwork.BackColor = Color.Red;
+                    lblCheckNetwork.Text = "연결끊김";
+                }
+            };
         }
 
         private void InitializeOpenGLControl()
@@ -189,9 +207,41 @@ namespace machinevision
 
         }
 
-        
+        private void Main_form_Load(object sender, EventArgs e)
+        {
+            timer1.Interval = 100; 
+            timer1.Start();  //타이머 시작    
+        }
 
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            DateTime nowDate = DateTime.Now;
+            lbltime.Text = nowDate.ToString("yyyy년MM월dd일ddd요일 \n HH:mm:ss");
+        }
 
+        private void iconButton3_Click(object sender, EventArgs e)
+        {
+           
+            string logText = "(수동)이것은 로그 메시지입니다. 현재 시간: " + DateTime.Now.ToString();
+
+            
+            string logFilePath = @"D:\c#\machinevision\로그파일.txt"; // 파일 이름 및 경로를 원하는 대로 수정하세요
+
+            try
+            {
+                // 파일을 생성하고 텍스트를 기록
+                using (StreamWriter writer = new StreamWriter(logFilePath, true))
+                {
+                    writer.WriteLine(logText);
+                }
+
+                Console.WriteLine("로그가 파일에 저장되었습니다.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("로그 저장 중 오류 발생: " + ex.Message);
+            }
+        }
     }
 
 

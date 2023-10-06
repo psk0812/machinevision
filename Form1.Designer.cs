@@ -29,6 +29,7 @@ namespace machinevision
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.openfile = new FontAwesome.Sharp.IconButton();
@@ -37,21 +38,25 @@ namespace machinevision
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel_opengl = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.grid_data = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.iconButton3 = new FontAwesome.Sharp.IconButton();
-            this.iconButton2 = new FontAwesome.Sharp.IconButton();
+            this.btnStop = new FontAwesome.Sharp.IconButton();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.iconButton1 = new FontAwesome.Sharp.IconButton();
+            this.btnStart = new FontAwesome.Sharp.IconButton();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.lbltime = new System.Windows.Forms.Label();
+            this.lblCheckNetwork = new System.Windows.Forms.Label();
+            this.timer_upload = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -60,7 +65,7 @@ namespace machinevision
             this.splitContainer1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel_opengl.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grid_data)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
@@ -133,7 +138,7 @@ namespace machinevision
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Controls.Add(this.panel_opengl, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.dataGridView1, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.grid_data, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -171,16 +176,17 @@ namespace machinevision
             this.label1.Text = "3D Image";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // dataGridView1
+            // grid_data
             // 
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ControlLight;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 350);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(479, 161);
-            this.dataGridView1.TabIndex = 1;
+            this.grid_data.BackgroundColor = System.Drawing.SystemColors.ControlLight;
+            this.grid_data.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grid_data.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grid_data.Location = new System.Drawing.Point(3, 350);
+            this.grid_data.Name = "grid_data";
+            this.grid_data.RowHeadersVisible = false;
+            this.grid_data.RowTemplate.Height = 23;
+            this.grid_data.Size = new System.Drawing.Size(479, 161);
+            this.grid_data.TabIndex = 1;
             // 
             // tableLayoutPanel2
             // 
@@ -249,13 +255,13 @@ namespace machinevision
             this.tableLayoutPanel7.ColumnCount = 3;
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.19786F));
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.80214F));
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 97F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 98F));
             this.tableLayoutPanel7.Controls.Add(this.iconButton3, 2, 1);
-            this.tableLayoutPanel7.Controls.Add(this.iconButton2, 1, 1);
+            this.tableLayoutPanel7.Controls.Add(this.btnStop, 1, 1);
             this.tableLayoutPanel7.Controls.Add(this.label7, 2, 0);
             this.tableLayoutPanel7.Controls.Add(this.label6, 1, 0);
             this.tableLayoutPanel7.Controls.Add(this.label5, 0, 0);
-            this.tableLayoutPanel7.Controls.Add(this.iconButton1, 0, 1);
+            this.tableLayoutPanel7.Controls.Add(this.btnStart, 0, 1);
             this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel7.Location = new System.Drawing.Point(3, 226);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
@@ -274,26 +280,27 @@ namespace machinevision
             this.iconButton3.IconChar = FontAwesome.Sharp.IconChar.CheckDouble;
             this.iconButton3.IconColor = System.Drawing.Color.LavenderBlush;
             this.iconButton3.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton3.Location = new System.Drawing.Point(204, 23);
+            this.iconButton3.Location = new System.Drawing.Point(203, 23);
             this.iconButton3.Name = "iconButton3";
-            this.iconButton3.Size = new System.Drawing.Size(92, 48);
+            this.iconButton3.Size = new System.Drawing.Size(93, 48);
             this.iconButton3.TabIndex = 7;
             this.iconButton3.UseVisualStyleBackColor = false;
+            this.iconButton3.Click += new System.EventHandler(this.iconButton3_Click);
             // 
-            // iconButton2
+            // btnStop
             // 
-            this.iconButton2.BackColor = System.Drawing.Color.SeaGreen;
-            this.iconButton2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.iconButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconButton2.ForeColor = System.Drawing.Color.SeaGreen;
-            this.iconButton2.IconChar = FontAwesome.Sharp.IconChar.Stop;
-            this.iconButton2.IconColor = System.Drawing.Color.LavenderBlush;
-            this.iconButton2.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton2.Location = new System.Drawing.Point(102, 23);
-            this.iconButton2.Name = "iconButton2";
-            this.iconButton2.Size = new System.Drawing.Size(96, 48);
-            this.iconButton2.TabIndex = 6;
-            this.iconButton2.UseVisualStyleBackColor = false;
+            this.btnStop.BackColor = System.Drawing.Color.SeaGreen;
+            this.btnStop.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnStop.ForeColor = System.Drawing.Color.SeaGreen;
+            this.btnStop.IconChar = FontAwesome.Sharp.IconChar.Stop;
+            this.btnStop.IconColor = System.Drawing.Color.LavenderBlush;
+            this.btnStop.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnStop.Location = new System.Drawing.Point(101, 23);
+            this.btnStop.Name = "btnStop";
+            this.btnStop.Size = new System.Drawing.Size(96, 48);
+            this.btnStop.TabIndex = 6;
+            this.btnStop.UseVisualStyleBackColor = false;
             // 
             // label7
             // 
@@ -302,9 +309,9 @@ namespace machinevision
             this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label7.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(204, 0);
+            this.label7.Location = new System.Drawing.Point(203, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(92, 20);
+            this.label7.Size = new System.Drawing.Size(93, 20);
             this.label7.TabIndex = 5;
             this.label7.Text = "CREATE LOG";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -316,7 +323,7 @@ namespace machinevision
             this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label6.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(102, 0);
+            this.label6.Location = new System.Drawing.Point(101, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(96, 20);
             this.label6.TabIndex = 4;
@@ -332,25 +339,25 @@ namespace machinevision
             this.label5.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(3, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(93, 20);
+            this.label5.Size = new System.Drawing.Size(92, 20);
             this.label5.TabIndex = 0;
             this.label5.Text = "START";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // iconButton1
+            // btnStart
             // 
-            this.iconButton1.BackColor = System.Drawing.Color.SeaGreen;
-            this.iconButton1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.iconButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconButton1.ForeColor = System.Drawing.Color.SeaGreen;
-            this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.Play;
-            this.iconButton1.IconColor = System.Drawing.Color.LavenderBlush;
-            this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton1.Location = new System.Drawing.Point(3, 23);
-            this.iconButton1.Name = "iconButton1";
-            this.iconButton1.Size = new System.Drawing.Size(93, 48);
-            this.iconButton1.TabIndex = 3;
-            this.iconButton1.UseVisualStyleBackColor = false;
+            this.btnStart.BackColor = System.Drawing.Color.SeaGreen;
+            this.btnStart.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnStart.ForeColor = System.Drawing.Color.SeaGreen;
+            this.btnStart.IconChar = FontAwesome.Sharp.IconChar.Play;
+            this.btnStart.IconColor = System.Drawing.Color.LavenderBlush;
+            this.btnStart.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnStart.Location = new System.Drawing.Point(3, 23);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(92, 48);
+            this.btnStart.TabIndex = 3;
+            this.btnStart.UseVisualStyleBackColor = false;
             // 
             // tableLayoutPanel5
             // 
@@ -359,6 +366,8 @@ namespace machinevision
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel5.Controls.Add(this.label4, 1, 0);
             this.tableLayoutPanel5.Controls.Add(this.label3, 0, 0);
+            this.tableLayoutPanel5.Controls.Add(this.lbltime, 1, 1);
+            this.tableLayoutPanel5.Controls.Add(this.lblCheckNetwork, 0, 1);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel5.Location = new System.Drawing.Point(0, 345);
             this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(0);
@@ -397,6 +406,36 @@ namespace machinevision
             this.label3.Text = "네트워크";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // lbltime
+            // 
+            this.lbltime.AutoSize = true;
+            this.lbltime.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbltime.Font = new System.Drawing.Font("나눔스퀘어", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lbltime.Location = new System.Drawing.Point(161, 27);
+            this.lbltime.Name = "lbltime";
+            this.lbltime.Size = new System.Drawing.Size(153, 142);
+            this.lbltime.TabIndex = 2;
+            this.lbltime.Text = "label8";
+            this.lbltime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblCheckNetwork
+            // 
+            this.lblCheckNetwork.AutoSize = true;
+            this.lblCheckNetwork.BackColor = System.Drawing.Color.LimeGreen;
+            this.lblCheckNetwork.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblCheckNetwork.Font = new System.Drawing.Font("나눔스퀘어", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblCheckNetwork.ForeColor = System.Drawing.Color.White;
+            this.lblCheckNetwork.Location = new System.Drawing.Point(3, 27);
+            this.lblCheckNetwork.Name = "lblCheckNetwork";
+            this.lblCheckNetwork.Size = new System.Drawing.Size(152, 142);
+            this.lblCheckNetwork.TabIndex = 3;
+            this.lblCheckNetwork.Text = "정상";
+            this.lblCheckNetwork.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Main_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -406,6 +445,7 @@ namespace machinevision
             this.Controls.Add(this.panel1);
             this.Name = "Main_form";
             this.Text = "Main";
+            this.Load += new System.EventHandler(this.Main_form_Load);
             this.panel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -415,7 +455,7 @@ namespace machinevision
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel_opengl.ResumeLayout(false);
             this.panel_opengl.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grid_data)).EndInit();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
@@ -436,7 +476,7 @@ namespace machinevision
         private System.Windows.Forms.TableLayoutPanel panel_opengl;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView grid_data;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
@@ -446,13 +486,17 @@ namespace machinevision
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private FontAwesome.Sharp.IconButton iconButton3;
-        private FontAwesome.Sharp.IconButton iconButton2;
+        private FontAwesome.Sharp.IconButton btnStop;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
-        private FontAwesome.Sharp.IconButton iconButton1;
+        private FontAwesome.Sharp.IconButton btnStart;
         private System.Windows.Forms.Panel panel3;
         private FontAwesome.Sharp.IconButton openfile;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label lbltime;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label lblCheckNetwork;
+        private System.Windows.Forms.Timer timer_upload;
     }
 }
 
